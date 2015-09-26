@@ -51,7 +51,8 @@ define static routes and a gateway.
              address: 192.168.10.18
              netmask: 255.255.255.0
              gateway: 192.168.10.1
-             options: []
+             options:
+              - "pre-up /etc/command"
              route:
               - network: 192.168.200.0
                 netmask: 255.255.255.0

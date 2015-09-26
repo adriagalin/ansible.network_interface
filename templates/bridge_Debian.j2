@@ -10,22 +10,28 @@ netmask {{ item.netmask }}
 {% if item.gateway is defined %}
 gateway {{ item.gateway }}
 {% endif %}
-{% if item.ports is defined %}        
+{% if item.ports is defined %}
 bridge_ports {{ item.ports|join(' ') }}
 {% endif %}
-{% if item.stp is defined %}        
+{% if item.stp is defined %}
 bridge_stp {{ item.stp }}
 {% endif %}
 {% endif %}
 
 {% if item.bootproto == 'dhcp' %}
 iface {{ item.device }}  inet dhcp
-{% if item.ports is defined %}        
+{% if item.ports is defined %}
 bridge_ports {{ item.port }}
 {% endif %}
-{% if item.stp is defined %}        
+{% if item.stp is defined %}
 bridge_stp {{ item.stp }}
 {% endif %}
+{% endif %}
+
+{% if item.options is defined %}
+{% for option in item.options %}
+{{ option }}
+{% endfor %}
 {% endif %}
 
 {% if item.route is defined %}
@@ -33,4 +39,3 @@ bridge_stp {{ item.stp }}
 up route add -net {{ i.network }}  netmask {{ i.netmask }} gw {{ i.gateway }} dev {{ item.device }}
 {% endfor %}
 {% endif %}
-

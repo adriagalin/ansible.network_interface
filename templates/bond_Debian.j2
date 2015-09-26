@@ -10,30 +10,36 @@ netmask {{ item.netmask }}
 {% if item.gateway is defined %}
 gateway {{ item.gateway }}
 {% endif %}
-{% if item.bond_mode is defined %}        
+{% if item.bond_mode is defined %}
 bond-mode {{ item.bond_mode }}
 {% endif %}
 bond-miimon {{ item.bond_miimon|default(100) }}
-{% if item.bond_slaves is defined and item.bond_mode == 'active-backup' %}        
+{% if item.bond_slaves is defined and item.bond_mode == 'active-backup' %}
 bond-slaves none
 {% endif %}
-{% if item.bond_slaves is defined and item.bond_mode == '802.3ad' %}        
+{% if item.bond_slaves is defined and item.bond_mode == '802.3ad' %}
 bond-slaves {{ item.bond_slaves|join(' ') }}
 {% endif %}
 {% endif %}
 
 {% if item.bootproto == 'dhcp' %}
 iface {{ item.device }}  inet dhcp
-{% if item.bond_mode is defined %}        
+{% if item.bond_mode is defined %}
 bond-mode {{ item.bond_mode }}
 {% endif %}
 bond-miimon {{ item.bond_miimon|default(100) }}
-{% if item.bond_slaves is defined and item.bond_mode == 'active-backup' %}        
+{% if item.bond_slaves is defined and item.bond_mode == 'active-backup' %}
 bond-slaves none
 {% endif %}
-{% if item.bond_slaves is defined and item.bond_mode == '802.3ad' %}        
+{% if item.bond_slaves is defined and item.bond_mode == '802.3ad' %}
 bond-slaves {{ item.bond_slaves|join(' ') }}
 {% endif %}
+{% endif %}
+
+{% if item.options is defined %}
+{% for option in item.options %}
+{{ option }}
+{% endfor %}
 {% endif %}
 
 {% if item.route is defined %}
@@ -41,4 +47,3 @@ bond-slaves {{ item.bond_slaves|join(' ') }}
 up route add -net {{ i.network }}  netmask {{ i.netmask }} gw {{ i.gateway }} dev {{ item.device }}
 {% endfor %}
 {% endif %}
-

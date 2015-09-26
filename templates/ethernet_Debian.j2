@@ -17,6 +17,12 @@ auto {{ item.device }}
 iface {{ item.device }}  inet dhcp
 {% endif %}
 
+{% if item.options is defined %}
+{% for option in item.options %}
+{{ option }}
+{% endfor %}
+{% endif %}
+
 {% if item.route is defined %}
 {% for i in item.route %}
 up route add -net {{ i.network }}  netmask {{ i.netmask }} gw {{ i.gateway }} dev {{ item.device }}

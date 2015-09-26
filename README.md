@@ -51,6 +51,7 @@ define static routes and a gateway.
              address: 192.168.10.18
              netmask: 255.255.255.0
              gateway: 192.168.10.1
+             options: []
              route:
               - network: 192.168.200.0
                 netmask: 255.255.255.0
@@ -74,6 +75,7 @@ define static routes and a gateway.
               bootproto: static
               stp: "on"
               ports: [eth1, eth2]
+              options: []
 
 Note: Routes can also be added for this interface in the same way routes are
 added for ethernet interfaces.
@@ -91,6 +93,7 @@ added for ethernet interfaces.
               bond_mode: active-backup
               bond_miimon: 100
               bond_slaves: [eth1, eth2]
+              options: []
               route:
               - network: 192.168.222.0
                 netmask: 255.255.255.0
@@ -177,4 +180,3 @@ Author Information
 ------------------
 
 Benno Joy
-

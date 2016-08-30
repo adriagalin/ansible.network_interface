@@ -1,9 +1,9 @@
 ---
 galaxy_info:
-  author: "Benno Joy"
+  author: "Benno Joy and modified by Adria Galin"
   company: AnsibleWorks
   license: "Simplified BSD License"
-  min_ansible_version: 1.4 
+  min_ansible_version: 1.9
   platforms:
    - name: EL
      versions:
@@ -20,8 +20,11 @@ galaxy_info:
       - quantal
       - raring
       - saucy
+      - trusty
+      - utopic
+      - wily
+      - xenial
   categories:
     - networking
     - system
 dependencies: []
-  
